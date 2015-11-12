@@ -63,7 +63,11 @@ while ( my $line = <ORIGIN> ){
 	@words = split( / /, $line );
 	foreach my $word (@words){
 		my $wordValue = $map{$word};
-		print $word, ' = ', $wordValue, "\n";
+		if ( !$wordValue ){
+			print STDERR "Error: what is $word ??\n";
+			exit 1;
+		}
+		#print $word, ' = ', $wordValue, "\n";
 		if ( $prev == 0 ){
 			$prev = $wordValue;
 		} elsif ( $prev > $wordValue ){
@@ -71,7 +75,7 @@ while ( my $line = <ORIGIN> ){
 		} else {
 			$prev = $prev * $wordValue;
 		}
-		if ( $wordValue >= 1000 ){
+		if ( $wordValue >= $map{thousand} ){
 			$lineTotal = $lineTotal + $prev;
 			$prev = 0; 
 		}
