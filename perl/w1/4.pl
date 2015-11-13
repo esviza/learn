@@ -37,58 +37,53 @@ my %map = ( 'one'       => 1,
 	    'hundred'   => 100,
 	    'thousand'  => 1000 );
 
-#  thirty four thousand two hundred fifty one
-#  30 4 1000 2 100 50 1
-
-#  ten thousand eleven 
-#  10 1000 11
-
-
 open ( ORIGIN, "<:utf8", "origin.txt" ) || die "Can't open origin: $!\n";
 
 my @buffer;
-my @words;
 
 while ( my $line = <ORIGIN> ){
 
-	my $lineTotal = 0;
-	my $prev      = 0;
+    chomp( $line );
+    last if !$line;
 
-	chomp( $line );
+    my $lineTotal = 0;
+    my $prev      = 0;
+    
+    foreach my $word ( split( / /, $line ) ){
+        
+        my $wordValue = $map{$word};
+        
+        if ( !$wordValue ){
+            print STDERR "Error: what is $word ??\n";
+            exit 1;
+        }
+        
+        if ( $prev == 0 ){
+            $prev = $wordValue;
+        } elsif ( $prev > $wordValue ){
+            $prev = $prev + $wordValue;
+        } else {
+            $prev = $prev * $wordValue;
+        }
+        
+        if ( $wordValue >= $map{thousand} ){
+            $lineTotal = $lineTotal + $prev;
+            $prev = 0; 
+        }
+    }
 
-	if ( !$line ){
-		 last;
-	}
+    if ( $prev > 0 ){
+        $lineTotal = $lineTotal + $prev;
+    }
 
-	@words = split( / /, $line );
-	foreach my $word (@words){
-		my $wordValue = $map{$word};
-		if ( !$wordValue ){
-			print STDERR "Error: what is $word ??\n";
-			exit 1;
-		}
-		#print $word, ' = ', $wordValue, "\n";
-		if ( $prev == 0 ){
-			$prev = $wordValue;
-		} elsif ( $prev > $wordValue ){
-			$prev = $prev + $wordValue;
-		} else {
-			$prev = $prev * $wordValue;
-		}
-		if ( $wordValue >= $map{thousand} ){
-			$lineTotal = $lineTotal + $prev;
-			$prev = 0; 
-		}
-	}
-
-	if ( $prev > 0 ){
-		$lineTotal = $lineTotal + $prev;
-	}
-
-	print STDOUT $line, ' = ', $lineTotal, "\n";
-
+    push @buffer, [ ( $lineTotal, $line ) ];
 }
 
+close ORIGIN;
+
+#-- ordeno por total linea
+my @ordered = sort{ $a->[0] <=> $b->[0] } @buffer;
+
+say $_->[1], " => ", $_->[0] foreach ( @ordered );
 
 exit 0;
-
