@@ -6,11 +6,16 @@
 #
 use v5.18;
 use strict;
-use Supertabla::CoordinatePoint;
+use warnings;
 
-my $o = Supertabla::CoordinatePoint->new();
-$o->MiMetodo();
+use Supertabla::Point2D;
+use Supertabla::Rectangle;
 
-my $p = Supertabla::CoordinatePoint->new();
-$p->MiMetodo();
-undef $p;
+
+
+my $rectangle = Supertabla::Rectangle->new();
+$rectangle->add_point( Supertabla::Point2D->new( 13, 9 ) );
+$rectangle->add_point( Supertabla::Point2D->new( 12, 8 ) );
+$rectangle->add_point( Supertabla::Point2D->new( 11, 7 ) );
+$rectangle->say_points();
+
