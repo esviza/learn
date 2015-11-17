@@ -8,14 +8,29 @@ use v5.18;
 use strict;
 use warnings;
 
-use Supertabla::Point2D;
-use Supertabla::Rectangle;
+use Render::FactoryOfCommands;
 
+# command figureType x1,y1 x2,y2 x3,y3
+if ( not exists $ARGV[0] ){
+    say STDERR "\nMissing command.\n";
+    exit 1;
+}
+if ( not $ARGV[0] =~ /(create)/ ){
+    say STDERR "\nUnknown command: $ARGV[0]\n";
+    exit 1;
+}
+if ( not exists $ARGV[1] ){
+    say STDERR "\nMissing type of figure.\n";
+    exit 1;
+}
+if ( not $ARGV[1] =~ /(rectangle|circle|square|triangle)/ ){
+    say STDERR "\nUnknown type: $ARGV[0]\n";
+    exit 1;
+}
 
+my( $userCommand, $userFigureType ) = ( $ARGV[0], $ARGV[1] );
+my @points = [ $ARGV[2], $ARGV[3], $ARGV[4], $ARGV[5] ];
 
-my $rectangle = Supertabla::Rectangle->new();
-$rectangle->add_point( Supertabla::Point2D->new( 13, 9 ) );
-$rectangle->add_point( Supertabla::Point2D->new( 12, 8 ) );
-$rectangle->add_point( Supertabla::Point2D->new( 11, 7 ) );
-$rectangle->say_points();
+my $command = Render::FactoryOfCommands->create_command( $userCommand );
 
+$command->execute( $userFigureType, @points );

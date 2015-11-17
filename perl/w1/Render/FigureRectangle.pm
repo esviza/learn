@@ -8,7 +8,7 @@ use v5.18;
 use strict;
 use warnings;
 
-package Supertabla::Rectangle;
+package Render::Rectangle;
 
 use parent 'Supertabla::Figure';
 

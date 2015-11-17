@@ -7,7 +7,7 @@
 use v5.18;
 use strict;
 
-package Supertabla::Figure;
+package Render::Figure;
 
 sub new {
     my $class = shift;

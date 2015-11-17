@@ -8,7 +8,7 @@ use v5.18;
 use strict;
 use warnings;
 
-package Supertabla::Point2D;
+package Render::Point2D;
 
 sub new {
     my $class = shift;
@@ -16,7 +16,6 @@ sub new {
     return bless $self, $class;
 }
 
-##
 # getter/setter X
 # @return number
 sub X {
@@ -27,7 +26,6 @@ sub X {
     return $self->{X};
 }
 
-##
 # Obtiene/setea el valor de Y
 # @return number
 sub Y
