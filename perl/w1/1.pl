@@ -15,7 +15,7 @@ if ( $a == 0 ){
 }
 
 #-- calculate roots
-my @roots = [ 0, 0 ];
+my @roots = ( 0, 0 );
 my $delta = $b**2 - ( 4*$a*$c );
 if ( $delta < 0 ){
     print STDERR "Roots undefined: delta<0\n";

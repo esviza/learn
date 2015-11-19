@@ -14,7 +14,7 @@ use parent 'Render::Object';
 
 use Render::FactoryOfFigure;
 use Render::FactoryOfPoint2D;
-use Render::Canvas;
+use Render::FactoryOfCanvas;
 
 sub _initialize {
     my( $self, @args ) = @_;
