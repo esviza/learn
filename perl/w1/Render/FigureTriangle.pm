@@ -25,9 +25,9 @@ sub render_into_canvas {
     my $self   = shift;
     my $canvas = shift;
 
-    my $p1 = @{$self->{points}}[0];
-    my $p2 = @{$self->{points}}[1];
-    my $p3 = @{$self->{points}}[2];
+    my $p1 = $self->{points}[0];
+    my $p2 = $self->{points}[1];
+    my $p3 = $self->{points}[2];
 
     $canvas->color( $self->{color} );
     
@@ -44,13 +44,13 @@ sub render_into_canvas {
 sub area {
     my $self = shift;
 
-    my $A = @{$self->{points}}[0];
-    my $B = @{$self->{points}}[1];
-    my $C = @{$self->{points}}[2];
+    my $a = $self->{points}[0];
+    my $b = $self->{points}[1];
+    my $c = $self->{points}[2];
     
-    return abs( ( ( $A->X() * ($B->Y()-$C->Y()) ) + 
-                  ( $B->X() * ($C->Y()-$A->Y()) ) +
-                  ( $C->X() * ($A->Y()-$B->Y()) ) ) / 2 );
+    return abs( ( ( $a->X() * ($b->Y()-$c->Y()) ) +
+                  ( $b->X() * ($c->Y()-$a->Y()) ) +
+                  ( $c->X() * ($a->Y()-$b->Y()) ) ) / 2 );
                   
                   
 }

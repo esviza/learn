@@ -31,5 +31,5 @@ if ( not $ARGV[1] =~ /(rectangle|circle|square|triangle)/ ){
 #-- get command with parameters
 my $command = Render::FactoryOfCommand->command( $ARGV[0] );
 
-$command->execute( ('figureType' => $ARGV[1],
-                    'userPoints' => [ $ARGV[2], $ARGV[3], $ARGV[4], $ARGV[5] ] ) );
+$command->execute( {'figureType' => $ARGV[1],
+                    'userPoints' => [ $ARGV[2], $ARGV[3], $ARGV[4], $ARGV[5] ] } );

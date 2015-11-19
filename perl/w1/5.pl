@@ -8,10 +8,6 @@
 use strict;
 use Paths::Graph;
 
-# $map{node83} = ( 'node16', 'node12', 'node01' );
-# $map{node12} = ( 'node11', 'node04', 'node16' );
-# $map{node04} = ( 'node05', 'node16', 'node01' );
-
 open ( ORIGIN, "<:utf8", "nodos.txt" ) || die "Can't open origin: $!\n";
 
 my %map;

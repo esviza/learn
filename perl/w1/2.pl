@@ -30,7 +30,9 @@ for ( $i=1; $i<$n; $i=$i+2 ){
 	$primo = 0;
 
 	while (1){
-		if ( $i % $j == 0 ) last;
+		if ( $i % $j == 0 ){
+            last;
+        }
 		if ( $j > $sqrt ){
 			$primo = 1;
 			last;

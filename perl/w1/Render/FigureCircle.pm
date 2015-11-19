@@ -28,8 +28,8 @@ sub render_into_canvas {
 
     $canvas->color( $self->{color} );
     
-    my $center    = @{$self->{points}}[0];
-    my $perimeter = @{$self->{points}}[1];
+    my $center    = $self->{points}[0];
+    my $perimeter = $self->{points}[1];
 
     my $a = Math::Complex->make( $center->X(), $center->Y() );
     my $b = Math::Complex->make( $perimeter->X(), $perimeter->Y() );
@@ -44,8 +44,8 @@ sub render_into_canvas {
 sub area {
     my $self = shift;
     
-    my $center    = @{$self->{points}}[0];
-    my $perimeter = @{$self->{points}}[1];
+    my $center    = $self->{points}[0];
+    my $perimeter = $self->{points}[1];
 
     my $a = Math::Complex->make( $center->X(), $center->Y() );
     my $b = Math::Complex->make( $perimeter->X(), $perimeter->Y() );
