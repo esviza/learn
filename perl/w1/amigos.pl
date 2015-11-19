@@ -7,9 +7,8 @@
 use v5.18;
 use strict;
 
-my %grupos = {'laburo'  => ['eric','laura','pablo','martin'],
-              'amigos'  => ['juan','diego','tamara'],
-              'familia' => ['malena','natalia','hebe'] };
+my %grupos = {'laburo'  => [ 'eric',  'laura',   'pablo', 'martin'],
+              'amigos'  => [ 'juan',  'diego',   'tamara' ],
+              'familia' => [ 'malena','natalia', 'hebe'] };
             
-
 print "Result: ".$grupos[1]."\n";

@@ -26,25 +26,19 @@ my $sqrt;
 for ( $i=1; $i<$n; $i=$i+2 ){
 
 	$sqrt  = sqrt $i;
-	$j     = 2;
-	$primo = 0;
-
-	while (1){
+	$j     = 1;
+	
+	while ($j++){
 		if ( $i % $j == 0 ){
             last;
         }
-		if ( $j > $sqrt ){
-			$primo = 1;
-			last;
+		if ( $sqrt < $j ){
+            print STDOUT $i, ' ';
+            last;
 		}
-		$j++;
-	}
-
-	if ( $primo ){
-		 print STDOUT "$i ";
 	}
 
 }
 
-print STDOUT "\n";
+print STDOUT "listo\n";
 
