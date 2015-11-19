@@ -1,33 +1,28 @@
 #!/usr/bin/perl
 #
 # @File Figure.pm
-# @Author ignaciocasinelli
+# @Author ignacio.casinelli
 # @Created Nov 17, 2015 10:54:11 AM
 #
 use v5.18;
 use strict;
+use warnings;
+use GD;
 
 package Render::Figure;
 
-sub new {
-    my $class = shift;
-    my $self  = { 'points' => [] };
-    return bless $self, $class;
+use parent 'Render::Object';
+
+sub _initialize {
+    my( $self, @args ) = @_;
+    $self->{points} = $args[0]->{points} || [];
+    $self->{color}  = $args[0]->{color}  || '0,0,0';
 }
 
 #-- adds a CoordinatePoint
-sub add_point {
+sub add_points {
     my $self  = shift;
-    my $point = shift;
-    push @{$self->{'points'}}, $point;
-}
-
-#-- say the points we have
-sub say_points {
-    my $self = shift;
-    foreach my $point ( @{$self->{points}} ){
-        $point->say_hi();
-    }
+    push @{$self->{'points'}}, shift;
 }
 
 1;

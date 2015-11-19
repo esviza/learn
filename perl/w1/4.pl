@@ -37,7 +37,7 @@ my %map = ( 'one'   => 1,
 	    'hundred'   => 100,
 	    'thousand'  => 1000 );
 
-open ( ORIGIN, "<:utf8", "origin.txt" ) || die "Can't open origin: $!\n";
+open ( ORIGEN, "<:utf8", "origin.txt" ) || die "Can't open origin: $!\n";
 
 my @buffer;
 
@@ -53,7 +53,7 @@ while ( my $line = <ORIGIN> ){
         
         my $wordValue = $map{$word};
         
-        if ( !$wordValue ){
+        if ( 0 == $wordValue ){
             print STDERR "Error: what is $word ??\n";
             exit 1;
         }

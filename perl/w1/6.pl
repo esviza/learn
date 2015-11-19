@@ -8,7 +8,7 @@ use v5.18;
 use strict;
 use warnings;
 
-use Render::FactoryOfCommands;
+use Render::FactoryOfCommand;
 
 # command figureType x1,y1 x2,y2 x3,y3
 if ( not exists $ARGV[0] ){
@@ -24,13 +24,12 @@ if ( not exists $ARGV[1] ){
     exit 1;
 }
 if ( not $ARGV[1] =~ /(rectangle|circle|square|triangle)/ ){
-    say STDERR "\nUnknown type: $ARGV[0]\n";
+    say STDERR "\nUnknown type: $ARGV[1]\n";
     exit 1;
 }
 
-my( $userCommand, $userFigureType ) = ( $ARGV[0], $ARGV[1] );
-my @points = [ $ARGV[2], $ARGV[3], $ARGV[4], $ARGV[5] ];
+#-- get command with parameters
+my $command = Render::FactoryOfCommand->command( $ARGV[0] );
 
-my $command = Render::FactoryOfCommands->create_command( $userCommand );
-
-$command->execute( $userFigureType, @points );
+$command->execute( {'figureType' => $ARGV[1],
+                    'userPoints' => [ $ARGV[2], $ARGV[3], $ARGV[4], $ARGV[5] ] });
