@@ -11,34 +11,40 @@ use warnings;
 package Render::Point2D;
 
 use parent 'Render::Object';
+use overload '""' => 'to_string';
 
 #--
 sub _initialize {
     my( $self, @args ) = @_;
-    $self->{X} = $args[0];
-    $self->{Y} = $args[1];
+    $self->{x} = $args[0];
+    $self->{y} = $args[1];
     return $self;
 }
 
 # getter/setter X
 # @return number
-sub X {
+sub x {
     my $self = shift;
     if (@_){
-        $self->{X} = shift;
+        $self->{x} = shift;
     }
-    return $self->{X};
+    return $self->{x};
 }
 
 # Obtiene/setea el valor de Y
 # @return number
-sub Y
+sub y
 {
     my $self = shift;
     if (@_){
-        $self->{Y} = shift;
+        $self->{y} = shift;
     }
-    return $self->{Y};
+    return $self->{y};
+}
+
+sub to_string {
+    my $self = shift;
+    return $self->{x}.",".$self->{y};
 }
 
 1;

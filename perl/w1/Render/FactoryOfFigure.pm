@@ -22,9 +22,21 @@ use Render::FigureTriangle;
 # @param @points
 # @return Figure
 sub figure {
-    my $class = shift;
-    my $type  = 'Render::Figure'.(ucfirst shift);
-    return $type->new();
+    my( $class, @args ) = @_;
+    
+    my $figureType = $args[0];
+    if ( not defined $figureType ){
+        say STDERR "\nMissing figure type.\n";
+        exit 1;
+    }
+    
+    if ( not $figureType =~ /(rectangle|square|triangle|circle)/ ){
+        say STDERR "\nUnknow figure type: $figureType\n";
+        exit 1;
+    }
+    
+    my $className = 'Render::Figure'.(ucfirst $figureType);
+    return $className->new();
 }
 
 1;

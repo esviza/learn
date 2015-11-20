@@ -18,8 +18,8 @@ use Render::Point2D;
 # @return Point2D
 sub from_xy {
     my $class = shift;
-    my( $X, $Y ) = split(',',shift);
-    return Render::Point2D->new( $X, $Y );
+    my( $x, $y ) = split(',',shift);
+    return Render::Point2D->new( $x, $y );
 }
 
 1;

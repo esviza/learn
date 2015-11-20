@@ -14,6 +14,7 @@ use parent 'Render::Figure';
 
 sub _initialize {
     my $self = shift;
+    $self->{type}  = 'rectangle';
     $self->{color} = 'blue';
 }
 
@@ -31,8 +32,8 @@ sub render_into_canvas {
     $canvas->color( $self->{color} );
     
     $canvas->gdi()->rectangle( 
-        $topLeft->X(), $topLeft->Y(),
-        $bottomRight->X(), $bottomRight->Y() );
+        $topLeft->x(), $topLeft->y(),
+        $bottomRight->x(), $bottomRight->y() );
         
 }
 
@@ -43,7 +44,7 @@ sub area {
     my $topRight    = $self->{points}[1];
     my $bottomLeft  = $self->{points}[2];
     my $bottomRight = $self->{points}[3];
-    return ( $topRight->X() - $topLeft->X() ) * ( $bottomLeft->Y() - $topLeft->Y() );
+    return ( $topRight->x() - $topLeft->x() ) * ( $bottomLeft->y() - $topLeft->y() );
 }
 
 1;

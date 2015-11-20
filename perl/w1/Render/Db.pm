@@ -7,16 +7,16 @@
 use v5.18;
 use strict;
 use warnings;
+use DBI;
 
-package Db;
+package Render::Db;
 
 sub new {
-    my $class = shift;
-    my $self  = {
-        'db_host'        => '',
-        'db_user'        => '',
-        'db_pass'        => '',
-        'db_database'    => '',
+    my( $class, @args ) = @_;
+    my $self = {
+        'host'           => 'localhost',
+        'user'           => 'root',
+        'database'       => '',
         'connection'     => 0,
         'last_result'    => 0,
         'last_sql'       => '',
@@ -26,11 +26,40 @@ sub new {
 }
 
 sub connect {
+    my( $self, @args ) = @_;
+    if ( defined $args[0] ){
+        $self->{database} = $args[0];
+    }
+    if ( defined $args[1] ){
+        $self->{user} = $args[1];
+    }
+    if ( defined $args[3] )
+    {
+        $self->{host} = $args[3];
+    }
+    my $cs = "DBI:mysql:database=".$self->{database}.";host=".$self->{host};
+    $self->{connection} = DBI->connect( $cs,$self->{user},$args[2]) || die "Could not connect to database: $DBI::errstr";
+}
+
+sub disconnect {
     my $self = shift;
+    $self->{connection}->disconnect();
+}
+
+sub insert {
+    my( $self, @args ) = @_;
+    my $sql = "INSERT INTO $args[0] (";
+    $sql = $sql . join ( ',', keys %{$args[1]} );
+    $sql = $sql . ") VALUES (";
+    $sql = $sql . join ( ',', $args[1] );
+    say $sql."\n";
+    $self->{connection}->do( $sql );
+    $self->{last_insert_id} = $self->{connection}->last_insert_id();
 }
 
 sub query {
-    my $self shift;
+    my $self = shift;
 }
 
 1;
+ 

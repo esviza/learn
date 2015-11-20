@@ -17,6 +17,7 @@ use parent 'Render::Figure';
 #--
 sub _initialize {
     my $self = shift;
+    $self->{type}  = 'circle';
     $self->{color} = 'orange';
 }
 
@@ -31,11 +32,11 @@ sub render_into_canvas {
     my $center    = $self->{points}[0];
     my $perimeter = $self->{points}[1];
 
-    my $a = Math::Complex->make( $center->X(), $center->Y() );
-    my $b = Math::Complex->make( $perimeter->X(), $perimeter->Y() );
+    my $a = Math::Complex->make( $center->x(), $center->y() );
+    my $b = Math::Complex->make( $perimeter->x(), $perimeter->y() );
     my $diameter = abs($a - $b) * 2;
     
-    $canvas->gdi()->moveTo( $center->X(), $center->Y() );
+    $canvas->gdi()->moveTo( $center->x(), $center->y() );
     $canvas->gdi()->arc( $diameter, $diameter, 0, 360 );
         
 }
