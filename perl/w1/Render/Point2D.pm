@@ -11,7 +11,6 @@ use warnings;
 package Render::Point2D;
 
 use parent 'Render::Object';
-use overload '""' => 'to_string';
 
 #--
 sub _initialize {
@@ -40,11 +39,6 @@ sub y
         $self->{y} = shift;
     }
     return $self->{y};
-}
-
-sub to_string {
-    my $self = shift;
-    return $self->{x}.",".$self->{y};
 }
 
 1;

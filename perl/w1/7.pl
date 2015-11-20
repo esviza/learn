@@ -11,9 +11,9 @@ use warnings;
 use Render::FactoryOfCommand;
 use Render::Db;
 
-my $command = Render::FactoryOfCommand->command( $ARGV[0] );
-
 my $db = Render::Db->new();
 $db->connect( 'nacho', 'nacho', 'nacho' );
 
-$command->execute( @ARGV, $db );
+my $command = Render::FactoryOfCommand->command( $ARGV[0] );
+$command->inject_db( $db );
+$command->execute( @ARGV );

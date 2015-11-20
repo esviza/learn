@@ -14,11 +14,18 @@ use parent 'Render::Object';
 
 sub _initialize {
     my( $self, @args ) = @_;
-    $self->{db} = $args[0]->{db};
+    $self->{db} = 0;
+    return $self;
 }
 
 sub execute {
     my $self = shift;
+}
+
+sub inject_db {
+    my( $self, @db );
+    $self->{db} = $db[0];
+    return $self;
 }
 
 1;

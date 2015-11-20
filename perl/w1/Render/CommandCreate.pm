@@ -10,7 +10,7 @@ use warnings;
 
 package Render::CommandCreate;
 
-use parent 'Render::Object';
+use parent 'Render::Command';
 
 use Render::FactoryOfFigure;
 use Render::FactoryOfPoint2D;
@@ -25,7 +25,7 @@ sub _initialize {
 
 sub execute {
     my( $self, @args ) = @_;
-    
+
     $self->{figureType} = $args[1];
     $self->{userPoints} = [ $args[2], $args[3], $args[4], $args[5] ];
     
@@ -49,7 +49,7 @@ sub execute {
     say "\nOutput => $file_name with an area of $area \n";
     
     #-- save to table
-    $figure->save();
+    $figure->save( $self->{db} );
     
     return ( result => 0,
              figure => $figure,
