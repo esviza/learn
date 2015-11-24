@@ -30,13 +30,21 @@ sub add_points {
 sub save {
     my( $self, @args ) = @_;
     my $db = $args[0];
-    my $points = join( ' ',@{$self->{points}} );
+    
+    my $type = "'".$self->{type}."'";
+    my $points = '';
+    foreach ( @{$self->{points}} ){
+        $points = $points.' '.$_->to_string();
+    }
+    $points = "'".$points."'";
+
+    
     if ( defined $db )
     {
         $db->insert(
             'FIGURE',
-            ('type'   => qw($self->{type}),
-             'points' => qw($points)  ) );
+            {'type'   => $type,
+             'points' => $points } );
     }
 }
 

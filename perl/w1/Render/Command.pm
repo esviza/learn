@@ -23,8 +23,8 @@ sub execute {
 }
 
 sub inject_db {
-    my( $self, @db );
-    $self->{db} = $db[0];
+    my( $self, @args ) = @_;
+    $self->{db} = $args[0];
     return $self;
 }
 

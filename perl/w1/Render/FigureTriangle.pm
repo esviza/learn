@@ -16,8 +16,8 @@ use parent 'Render::Figure';
 #--
 sub _initialize {
     my $self = shift;
-    $self->{triangle} = 'triangle';
-    $self->{color}    = 'green';
+    $self->{type}  = 'triangle';
+    $self->{color} = 'green';
 }
 
 #-- 

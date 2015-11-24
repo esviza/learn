@@ -48,18 +48,27 @@ sub disconnect {
 
 sub insert {
     my( $self, @args ) = @_;
+
     my $sql = "INSERT INTO $args[0] (";
-    $sql = $sql . join ( ',', keys %{$args[1]} );
+    $sql = $sql . join(',',keys %{$args[1]});
     $sql = $sql . ") VALUES (";
-    $sql = $sql . join ( ',', $args[1] );
-    say $sql."\n";
+    $sql = $sql . join(',',values %{$args[1]});
+    $sql = $sql . ");";
     $self->{connection}->do( $sql );
-    $self->{last_insert_id} = $self->{connection}->last_insert_id();
+    
+    $self->{last_insert_id} = $self->{connection}->last_insert_id(undef,undef,undef,undef);
 }
 
 sub query {
     my $self = shift;
+    my $sql = shift;
+    $self->{last_sql} = $sql;
+    my $aux = $self->{connection}->prepare( $sql );
+    $aux->execute();
+    return $aux;
 }
+
+
 
 1;
  

@@ -41,4 +41,9 @@ sub y
     return $self->{y};
 }
 
+sub to_string {
+    my $self = shift;
+    return $self->{x}.','.$self->{y};
+}
+
 1;

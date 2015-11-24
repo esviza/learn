@@ -48,8 +48,8 @@ sub area {
     my $center    = $self->{points}[0];
     my $perimeter = $self->{points}[1];
 
-    my $a = Math::Complex->make( $center->X(), $center->Y() );
-    my $b = Math::Complex->make( $perimeter->X(), $perimeter->Y() );
+    my $a = Math::Complex->make( $center->x(), $center->y() );
+    my $b = Math::Complex->make( $perimeter->x(), $perimeter->y() );
     my $radius = abs($a - $b);
     
     return 3.1415926 * ( $radius ** 2 );
